@@ -1,11 +1,24 @@
 from flask import Flask, redirect, render_template, request
 import os
+import mysql.connector
+from mysql.connector import Error
+
+connection = None
+try:
+    connection = mysql.connector.connect(
+        host="....",
+        user="psqladmin",
+        passwd="...",
+        database="...."
+    )
+    print("Connection to MySQL DB successful")
+except Error as e:
+    print(f"The error '{e}' occurred")
 
 appWeb = Flask(__name__)
 
 #http://www.miosito.it/prova
 #http://www.miosito.it/saluto
-
 #http://www.miosito.it/
 
 class Utente:
