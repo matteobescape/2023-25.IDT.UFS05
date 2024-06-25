@@ -3,17 +3,6 @@ import os
 import mysql.connector
 from mysql.connector import Error
 
-connection = None
-try:
-    connection = mysql.connector.connect(
-        host="....",
-        user="psqladmin",
-        passwd="...",
-        database="...."
-    )
-    print("Connection to MySQL DB successful")
-except Error as e:
-    print(f"The error '{e}' occurred")
 
 appWeb = Flask(__name__)
 
@@ -69,6 +58,20 @@ loggedUser = None
 @appWeb.route("/")
 def main():
     return "pagina iniziale da visualizzare"
+    connection = None, response = "no response"
+    try:
+        connection = mysql.connector.connect(
+            host="its-rizzoli-idt-mysql.mysql.database.azure.com",
+            user="psqladmin",
+            passwd="H@Sh1CoR3!",
+            database="test"
+        )
+        reponse = "Connection to MySQL DB successful"
+    except Error as e:
+        response = f"The error '{e}' occurred"
+    
+    return response
+
 
 @appWeb.route("/prova")
 def prova():
