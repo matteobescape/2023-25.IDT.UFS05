@@ -64,7 +64,7 @@ def main():
             host="its-rizzoli-idt-mysql.mysql.database.azure.com",
             user="psqladmin",
             passwd="H@Sh1CoR3!",
-            database="test"
+            database="ufs05db"
         )
         reponse = "Connection to MySQL DB successful"
     except Error as e:
