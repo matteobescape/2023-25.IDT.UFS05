@@ -57,25 +57,34 @@ loggedUser = None
 
 @appWeb.route("/")
 def main():
-    return "pagina iniziale da visualizzare"
-    connection = None, response = "no response"
+    connection = None
+    risposta = "nessuna risposta"
     try:
         connection = mysql.connector.connect(
-            host="its-rizzoli-idt-mysql.mysql.database.azure.com",
+            host="its-rizzoli-idt-mysql-37828.mysql.database.azure.com",
             user="psqladmin",
             passwd="H@Sh1CoR3!",
             database="ufs05db"
         )
-        reponse = "Connection to MySQL DB successful"
+        risposta = "Connection to MySQL DB successful"
+        cursor = connection.cursor()
+
+        query = ("SELECT first_name, last_name FROM employees")
+        cursor.execute(query)
+
+        for (first_name, last_name) in cursor:
+            risposta = first_name +last_name
+        cursor.close()
+        connection.close()
     except Error as e:
-        response = f"The error '{e}' occurred"
-    
-    return response
+        risposta = f"The error '{e}' occurred"
+    return  risposta
 
 
 @appWeb.route("/prova")
 def prova():
     return "stringa da visualizzare come prova"
+
 @appWeb.route("/presentazione")
 def saluto():
     return "Buongiorno"
